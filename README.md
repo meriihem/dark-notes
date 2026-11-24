@@ -1,2 +1,2 @@
-# -dark-notes
+# dark-notes
 Personal notes application
