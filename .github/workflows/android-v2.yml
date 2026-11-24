@@ -84,7 +84,7 @@ jobs:
           }
           JAVA
       - name: Generate branded Android launcher icons
-        run: node scripts/generate-icons.mjs
+        run: node scripts/generate-icons.mjs --android
       - name: Sync Capacitor
         run: npx cap sync android
       - name: Build debug APK
