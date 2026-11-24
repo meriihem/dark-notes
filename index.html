@@ -160,7 +160,7 @@ function backgroundUrl(id){const item=NOTE_BACKGROUNDS.find(x=>x.id===id);return
 function renderEditorBackgrounds(){
  const el=$('editorBackgrounds');if(!el)return;
  const choices=[{id:'',name:'Без фона',none:true},...NOTE_BACKGROUNDS];
- el.innerHTML=choices.map(x=>'<button type="button" class="background-choice '+(x.none?'none ':'')+(noteBackground===x.id?'active':'')+'" data-background="'+x.id+'" aria-label="'+x.name+'" '+(!x.none?'style="background-image:url(\\''+backgroundUrl(x.id)+'\\')"':'')+'><span>'+x.name+'</span></button>').join('');
+ el.innerHTML=choices.map(x=>'<button type="button" class="background-choice '+(x.none?'none ':'')+(noteBackground===x.id?'active':'')+'" data-background="'+x.id+'" aria-label="'+x.name+'" '+(!x.none?'style="background-image:url(&quot;'+backgroundUrl(x.id)+'&quot;)"':'')+'><span>'+x.name+'</span></button>').join('');
  el.querySelectorAll('[data-background]').forEach(b=>b.onclick=()=>{noteBackground=b.dataset.background;renderEditorBackgrounds();applyEditorBackground()});
 }
 function applyEditorBackground(){
