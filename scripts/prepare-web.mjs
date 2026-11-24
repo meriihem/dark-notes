@@ -14,3 +14,5 @@ await mkdir('www/icons', { recursive: true });
 await cp('assets/note-backgrounds', 'www/assets/note-backgrounds', { recursive: true });
 for (const file of ['icon-192.png','icon-512.png','icon-512-maskable.png']) await copyFile(`icons/${file}`, `www/icons/${file}`);
 console.log('Prepared Dark Notes web assets and icons in ./www');
+
+// Rebuild after polishing the per-note mystical background picker.
