@@ -5,6 +5,7 @@ on:
   push:
     branches:
       - dark-notes-v2-mystical-archive
+      - dark-notes-account-auth
     paths:
       - 'index.html'
       - 'package.json'
