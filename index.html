@@ -176,13 +176,12 @@ function noteCardStyle(n){
 
 
 async function openCollectionCover(folder){
- const sheet=$('sheet');$('editorTitle').textContent='Обложка · '+folder;
- const choices=[{id:'',name:'Без обложки',none:true},...NOTE_BACKGROUNDS];
- sheet.innerHTML='<div class="sheethead"><div><div class="brand" style="font-size:9px;letter-spacing:3px;margin-bottom:5px">DARK NOTES · КОЛЛЕКЦИЯ</div><h2 id="editorTitle">Обложка · '+escapeHtml(folder)+'</h2></div><button class="iconbtn" id="closeCover">✕</button></div><p class="help">Выбери изображение для карточки коллекции. Оно сохранится в облаке и будет доступно на других устройствах.</p><div class="background-grid" id="coverChoices"></div>';
- const grid=$('coverChoices'),current=collectionCovers[folder]||'';
- grid.innerHTML=choices.map(x=>'<button type="button" class="background-choice '+(x.none?'none ':'')+(current===x.id?'active':'')+'" data-cover-choice="'+x.id+'" '+(!x.none?'style="background-image:url(&quot;'+backgroundUrl(x.id)+'&quot;)"':'')+'><span>'+x.name+'</span></button>').join('');
- grid.querySelectorAll('[data-cover-choice]').forEach(b=>b.onclick=async()=>{const id=b.dataset.coverChoice;try{const next={...collectionCovers};if(id)next[folder]=id;else delete next[folder];await setDoc(doc(db,'users',uid,'preferences','collectionCovers'),{covers:next},{merge:true});collectionCovers=next;$('modal').classList.remove('show');render();showToast('Обложка коллекции сохранена')}catch(e){showToast('Не удалось сохранить обложку: '+e.message)}});
- $('closeCover').onclick=()=>{$('modal').classList.remove('show');render()};$('modal').classList.add('show');
+ let modal=$('coverModal');if(!modal){modal=document.createElement('div');modal.id='coverModal';modal.className='modal';document.body.appendChild(modal)}
+ const choices=[{id:'',name:'Без обложки',none:true},...NOTE_BACKGROUNDS],current=collectionCovers[folder]||'';
+ modal.innerHTML='<div class="sheet"><div class="sheethead"><div><div class="brand" style="font-size:9px;letter-spacing:3px;margin-bottom:5px">DARK NOTES · КОЛЛЕКЦИЯ</div><h2>Обложка · '+escapeHtml(folder)+'</h2></div><button class="iconbtn" id="closeCover">✕</button></div><p class="help">Выбери изображение для карточки коллекции. Оно сохранится в облаке и будет доступно на других устройствах.</p><div class="background-grid" id="coverChoices"></div></div>';
+ const grid=$('coverChoices');grid.innerHTML=choices.map(x=>'<button type="button" class="background-choice '+(x.none?'none ':'')+(current===x.id?'active':'')+'" data-cover-choice="'+x.id+'" '+(!x.none?'style="background-image:url(&quot;'+backgroundUrl(x.id)+'&quot;)"':'')+'><span>'+x.name+'</span></button>').join('');
+ grid.querySelectorAll('[data-cover-choice]').forEach(el=>el.onclick=async()=>{const id=el.dataset.coverChoice;try{const next={...collectionCovers};if(id)next[folder]=id;else delete next[folder];await setDoc(doc(db,'users',uid,'preferences','collectionCovers'),{covers:next},{merge:true});collectionCovers=next;modal.classList.remove('show');render();showToast('Обложка коллекции сохранена')}catch(e){showToast('Не удалось сохранить обложку: '+e.message)}});
+ $('closeCover').onclick=()=>modal.classList.remove('show');modal.onclick=e=>{if(e.target===modal)modal.classList.remove('show')};modal.classList.add('show');
 }
 function renderEditorPalette(){
  const el=$('editorPalette');if(!el)return;
