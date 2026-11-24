@@ -18,6 +18,96 @@
 .note-palette{display:flex;gap:8px;flex-wrap:wrap;margin:9px 0 14px}
 .note-color{width:28px;height:28px;border-radius:9px;border:2px solid #ffffff33;padding:0}
 .note-color.selected{outline:2px solid var(--gold);outline-offset:2px}
+
+/* GRIMOIRE — mystical manuscript treatment */
+.sheet{
+  position:relative;
+  background:
+    radial-gradient(ellipse at 50% -12%,#c9a96e18,transparent 48%),
+    linear-gradient(155deg,#201d1a 0%,#171719 46%,#121317 100%);
+  border-color:#75634d88;
+  box-shadow:0 -18px 60px #0009,inset 0 1px #c9a96e22;
+}
+.sheet:before{
+  content:"";display:block;width:58px;height:3px;border-radius:9px;
+  background:linear-gradient(90deg,transparent,var(--gold),transparent);
+  margin:0 auto 17px;opacity:.85;
+}
+.sheethead{padding-bottom:13px;border-bottom:1px solid #75634d66}
+.sheethead h2{
+  font-family:Georgia,'Times New Roman',serif;font-weight:400;
+  letter-spacing:.2px;color:#ead9b8;font-size:23px;
+}
+.sheethead .brand{color:var(--gold);text-shadow:0 0 14px #c9a96e33}
+#title.field{
+  background:linear-gradient(180deg,#211e1b,#19191b);
+  border:1px solid #75634d88;border-radius:10px;
+  font-family:Georgia,'Times New Roman',serif;font-size:19px;
+  color:#f0e4ce;padding:15px 16px;
+}
+#folder.field,#tags.field{
+  background:#151619;border-color:#39343a;color:#c9c1b4;
+}
+.editor-tools-label{
+  color:var(--gold);font-size:9px;letter-spacing:2.4px;
+  display:flex;align-items:center;gap:9px;
+}
+.editor-tools-label:after{
+  content:"";height:1px;flex:1;
+  background:linear-gradient(90deg,#75634d88,transparent);
+}
+.toolbar{
+  padding:9px;background:#111216;border:1px solid #75634d55;
+  border-radius:13px;box-shadow:inset 0 1px #ffffff08;
+}
+.tool{
+  background:linear-gradient(180deg,#2a2725,#1a1a1d);
+  border-color:#62513e88;color:#d9cbb4;
+  box-shadow:inset 0 1px #ffffff0a;
+}
+.tool:active,.tool:focus{
+  background:#342b20;border-color:var(--gold);color:#f0d9ad;
+}
+.editor{
+  min-height: min(44vh,420px);
+  background:
+    radial-gradient(ellipse at 50% 0%,#c9a96e12,transparent 55%),
+    repeating-linear-gradient(0deg,#d9c39a05 0px,#d9c39a05 1px,transparent 1px,transparent 5px),
+    linear-gradient(145deg,#191817,#141518 72%);
+  border:1px solid #806b4d99;
+  border-radius:12px;padding:22px 20px;
+  color:#e7ddca;line-height:1.95;
+  font-family:Georgia,'Times New Roman',serif;
+  font-size:17px;letter-spacing:.12px;
+  box-shadow:inset 0 0 32px #0005,inset 0 1px #d4b47a12;
+}
+.editor:focus{
+  border-color:var(--gold);
+  box-shadow:inset 0 0 32px #0005,0 0 0 1px #c9a96e33,0 12px 35px #0005;
+}
+.editor:empty:before{color:#827967;font-style:italic}
+.editor h2{
+  color:#d8b77c;font-size:25px;
+  border-bottom:1px solid #75634d66;padding-bottom:8px;
+}
+.editor h3{color:#e3cda7;font-size:20px}
+.editor blockquote{
+  border-left:2px solid var(--gold);background:linear-gradient(90deg,#c9a96e12,transparent);
+  color:#d2c1a3;padding:12px 15px;border-radius:0 8px 8px 0;
+}
+.editor hr{border-top:1px solid #8b714b;position:relative}
+.editor strong{color:#f4dfb8}
+#save.primary{
+  background:linear-gradient(135deg,#d7b77d,#ad8950);
+  box-shadow:0 5px 18px #0005,inset 0 1px #fff5;
+}
+#favorite.secondary,#pinned.secondary{
+  border-color:#75634d88;color:#d6c4a4;
+}
+@media(prefers-reduced-motion:no-preference){
+  .tool,.primary,.secondary{transition:background .18s ease,border-color .18s ease,box-shadow .18s ease}
+}
+
 </style>
 <link rel="manifest" href="./manifest.webmanifest">
 <link rel="icon" href="./icons/icon-192.png" type="image/png">
