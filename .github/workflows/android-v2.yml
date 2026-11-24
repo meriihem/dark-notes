@@ -15,6 +15,10 @@ on:
 permissions:
   contents: write
 
+concurrency:
+  group: dark-notes-android-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -28,6 +32,7 @@ jobs:
           git add assets/note-backgrounds
           if ! git diff --cached --quiet; then
             git commit -m "Add mystical note background artwork [skip ci]"
+            git pull --rebase origin "$GITHUB_REF_NAME"
             git push
           fi
       - uses: actions/setup-node@v4
