@@ -1,0 +1,8 @@
+{
+  "appId": "com.meriihem.darknotes",
+  "appName": "Dark Notes",
+  "webDir": "www",
+  "server": {
+    "androidScheme": "https"
+  }
+}
