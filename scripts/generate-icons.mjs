@@ -30,3 +30,5 @@ if (process.argv.includes('--android')) {
   await (await import('node:fs/promises')).writeFile(`${android}/values/ic_launcher_background.xml`, `<resources><color name="ic_launcher_background">#101114</color></resources>`);
 }
 console.log('Generated original Dark Notes artwork icons' + (process.argv.includes('--android') ? ' and Android launcher resources.' : '.'));
+
+// Icon source is the committed Dark Notes grimoire artwork in assets/dark-notes-icon.jpg.
