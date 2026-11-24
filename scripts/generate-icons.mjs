@@ -14,6 +14,7 @@ await png('icon-192.png', 192);
 await png('icon-512.png', 512);
 await png('icon-512-maskable.png', 512);
 
+if (process.argv.includes('--android')) {
 const android = 'android/app/src/main/res';
 for (const [density, size] of Object.entries({mdpi:48,hdpi:72,xhdpi:96,xxhdpi:144,xxxhdpi:192})) {
   await png(`${android}/mipmap-${density}/ic_launcher.png`, size);
@@ -27,4 +28,5 @@ await (await import('node:fs/promises')).writeFile(`${android}/mipmap-anydpi-v26
 await (await import('node:fs/promises')).writeFile(`${android}/mipmap-anydpi-v26/ic_launcher_round.xml`, xml);
 await mkdir(`${android}/values`, {recursive:true});
 await (await import('node:fs/promises')).writeFile(`${android}/values/ic_launcher_background.xml`, `<resources><color name="ic_launcher_background">#101114</color></resources>`);
-console.log('Generated Dark Notes Android and PWA icons.');
+}
+console.log('Generated Dark Notes web icons' + (process.argv.includes('--android') ? ' and Android launcher icons.' : '.'));
