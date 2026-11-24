@@ -68,7 +68,7 @@ function renderEditorPalette(){
  const el=$('editorPalette');if(!el)return;
  el.innerHTML=NOTE_COLORS.map(c=>'<button type="button" class="note-color '+(c===noteColor?'selected':'')+'" data-note-color="'+c+'" style="background:'+c+'" aria-label="Цвет заметки"></button>').join('')+'<input class="color-input" type="color" id="customNoteColor" value="'+safeColor(noteColor)+'" aria-label="Свой цвет">';
  el.querySelectorAll('[data-note-color]').forEach(b=>b.onclick=()=>{noteColor=b.dataset.noteColor;renderEditorPalette()});
- $('customNoteColor').oninput=e=>{noteColor=e.target.value;renderEditorPalette()};
+ $('customNoteColor').oninput=e=>{noteColor=e.target.value;el.querySelectorAll('[data-note-color]').forEach(b=>b.classList.toggle('selected',b.dataset.noteColor===noteColor))};
 }
 function fillAppearanceInputs(){
  [['themeBg','bg'],['themePanel','panel'],['themeText','text'],['themeAccent','accent']].forEach(([id,k])=>{const el=$(id);if(el)el.value=safeColor(appearance[k])});
