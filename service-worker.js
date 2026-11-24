@@ -1,4 +1,4 @@
-const SHELL_CACHE = "dark-notes-shell-v2";
+const SHELL_CACHE = "dark-notes-shell-v3";
 const FIREBASE_CACHE = "dark-notes-firebase-11-0-2";
 
 const APP_SHELL = [
@@ -7,7 +7,17 @@ const APP_SHELL = [
   "./manifest.webmanifest",
   "./icons/icon-192.png",
   "./icons/icon-512.png",
-  "./icons/icon-512-maskable.png"
+  "./icons/icon-512-maskable.png",
+  "./assets/note-backgrounds/library.jpg",
+  "./assets/note-backgrounds/grimoire.jpg",
+  "./assets/note-backgrounds/cathedral.jpg",
+  "./assets/note-backgrounds/forest.jpg",
+  "./assets/note-backgrounds/alchemy.jpg",
+  "./assets/note-backgrounds/astral.jpg",
+  "./assets/note-backgrounds/cemetery.jpg",
+  "./assets/note-backgrounds/ritual.jpg",
+  "./assets/note-backgrounds/castle.jpg",
+  "./assets/note-backgrounds/raven.jpg"
 ];
 
 self.addEventListener("install", event => {
