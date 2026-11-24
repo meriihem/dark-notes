@@ -25,12 +25,12 @@ if (process.argv.includes('--android')) {
   }
   await mkdir(`${android}/mipmap-anydpi-v26`, {recursive:true});
   await mkdir(`${android}/drawable`, {recursive:true});
-  await sharp(image).resize(432,432,{fit:'cover'}).png().toFile(`${android}/drawable/ic_launcher_foreground.png`);
-  const xml = `<adaptive-icon xmlns:android="http://schemas.android.com/apk/res/android"><background android:drawable="@color/ic_launcher_background"/><foreground android:drawable="@drawable/ic_launcher_foreground"/></adaptive-icon>`;
+  await sharp(image).resize(432,432,{fit:'contain', background:'#101114'}).png().toFile(`${android}/drawable/dark_notes_launcher_foreground.png`);
+  const xml = `<adaptive-icon xmlns:android="http://schemas.android.com/apk/res/android"><background android:drawable="@color/dark_notes_launcher_background"/><foreground android:drawable="@drawable/dark_notes_launcher_foreground"/></adaptive-icon>`;
   await (await import('node:fs/promises')).writeFile(`${android}/mipmap-anydpi-v26/ic_launcher.xml`, xml);
   await (await import('node:fs/promises')).writeFile(`${android}/mipmap-anydpi-v26/ic_launcher_round.xml`, xml);
   await mkdir(`${android}/values`, {recursive:true});
-  await (await import('node:fs/promises')).writeFile(`${android}/values/ic_launcher_background.xml`, `<resources><color name="ic_launcher_background">#101114</color></resources>`);
+  await (await import('node:fs/promises')).writeFile(`${android}/values/dark_notes_launcher_background.xml`, `<resources><color name="dark_notes_launcher_background">#101114</color></resources>`);
 }
 console.log('Generated original Dark Notes artwork icons' + (process.argv.includes('--android') ? ' and Android launcher resources.' : '.'));
 
