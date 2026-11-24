@@ -1,0 +1,54 @@
+name: Dark Notes 2.0 — iOS
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - dark-notes-v2-mystical-archive
+    paths:
+      - 'index.html'
+      - 'package.json'
+      - 'capacitor.config.json'
+      - 'scripts/**'
+      - '.github/workflows/ios-v2.yml'
+
+jobs:
+  build-simulator:
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Install dependencies
+        run: npm install
+      - name: Prepare web app
+        run: npm run build:web
+      - name: Generate iOS project
+        run: npx cap add ios
+      - name: Sync Capacitor
+        run: npx cap sync ios
+      - name: Build unsigned iOS Simulator app
+        run: |
+          xcodebuild \
+            -workspace ios/App/App.xcworkspace \
+            -scheme App \
+            -sdk iphonesimulator \
+            -configuration Debug \
+            -derivedDataPath build/ios-derived \
+            CODE_SIGNING_ALLOWED=NO \
+            build
+      - name: Package simulator app
+        run: |
+          APP_PATH="$(find build/ios-derived/Build/Products -maxdepth 2 -name App.app -type d -print -quit)"
+          if [ -z "$APP_PATH" ]; then
+            echo "App.app not found"
+            exit 1
+          fi
+          cd "$(dirname "$APP_PATH")"
+          zip -r "$GITHUB_WORKSPACE/Dark-Notes-iOS-Simulator.zip" App.app
+      - uses: actions/upload-artifact@v4
+        with:
+          name: dark-notes-2-ios-simulator
+          path: Dark-Notes-iOS-Simulator.zip
+          if-no-files-found: error
