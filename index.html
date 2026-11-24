@@ -1,111 +1,37 @@
 <!doctype html>
 <html lang="ru">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="theme-color" content="#101114">
-<title>Dark Notes</title>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#101114"><title>Dark Notes</title>
 <style>
-:root{--bg:#101114;--panel:#1a1c21;--panel2:#22252b;--line:#30333b;--text:#f3f0e9;--muted:#9b9da6;--gold:#d0b078;--red:#e58b8b}
-*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,sans-serif;min-height:100vh}
-button,input,textarea,select{font:inherit}button{cursor:pointer}
-.app{max-width:850px;margin:auto;padding:24px 18px 110px}
-.top{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:26px}
-.brand{font-size:12px;letter-spacing:4px;color:var(--gold);font-weight:800}.cloud{font-size:11px;color:var(--muted);display:flex;align-items:center;gap:7px}.dot{width:7px;height:7px;border-radius:50%;background:#d5a85e}
-h1{font-size:clamp(28px,7vw,40px);line-height:1.1;margin:10px 0 18px;letter-spacing:-1.4px}.sub{color:var(--muted);font-size:14px;margin-bottom:20px}
-.search{width:100%;background:var(--panel);border:1px solid var(--line);border-radius:15px;padding:14px 16px;color:var(--text);outline:none}
-.search:focus,.field:focus{border-color:var(--gold)}
-.chips{display:flex;gap:8px;overflow:auto;padding:14px 0 18px;scrollbar-width:none}.chip{white-space:nowrap;border:1px solid var(--line);border-radius:999px;background:transparent;color:var(--muted);padding:9px 14px;font-size:12px}.chip.active{background:var(--gold);color:#171717;border-color:var(--gold);font-weight:700}
-.section{display:flex;align-items:center;justify-content:space-between;margin:8px 0 12px}.section span{font-size:11px;letter-spacing:2px;color:var(--muted);font-weight:700}
-.notes{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:11px}.note{background:var(--panel);border:1px solid var(--line);border-radius:17px;padding:16px;min-height:142px;display:flex;flex-direction:column;gap:9px;cursor:pointer;transition:.15s}.note:active{transform:scale(.985)}.note h3{font-size:16px;margin:0;line-height:1.3;overflow-wrap:anywhere}.note p{font-size:13px;color:var(--muted);margin:0;line-height:1.45;white-space:pre-wrap;overflow:hidden;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical}.meta{display:flex;justify-content:space-between;align-items:center;margin-top:auto;gap:8px;color:var(--gold);font-size:10px}.tag{color:var(--gold);font-size:9px;letter-spacing:1.3px;text-transform:uppercase}
-.empty{grid-column:1/-1;text-align:center;padding:52px 12px;color:var(--muted)}.empty b{display:block;color:var(--text);font-size:17px;margin:10px}
-.fab{position:fixed;right:max(20px,calc((100vw - 850px)/2 + 18px));bottom:22px;background:var(--gold);color:#171717;border:0;border-radius:17px;padding:16px 20px;font-weight:800;box-shadow:0 10px 32px #0008}
-.modal{position:fixed;inset:0;background:#000a;display:none;align-items:flex-end;justify-content:center;padding:12px;z-index:5}.modal.show{display:flex}.sheet{background:var(--panel);border:1px solid var(--line);border-radius:22px 22px 16px 16px;width:min(100%,650px);padding:20px;max-height:92vh;overflow:auto}.sheethead{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px}.sheethead h2{margin:0;font-size:20px}.iconbtn{background:var(--panel2);border:1px solid var(--line);color:var(--text);border-radius:11px;padding:9px 12px}.field{display:block;width:100%;background:#121418;border:1px solid var(--line);border-radius:12px;color:var(--text);padding:13px;margin:9px 0;outline:none}.bodyfield{min-height:210px;resize:vertical;line-height:1.5}.actions{display:flex;gap:9px;align-items:center;margin-top:14px}.primary{background:var(--gold);color:#171717;border:0;border-radius:12px;padding:13px 17px;font-weight:800;flex:1}.danger{background:transparent;color:var(--red);border:1px solid #744747;border-radius:12px;padding:12px}.secondary{background:var(--panel2);color:var(--text);border:1px solid var(--line);border-radius:12px;padding:12px}
-.setup{max-width:560px;margin:10vh auto;padding:24px}.setupbox{background:var(--panel);border:1px solid var(--line);border-radius:20px;padding:22px}.setupbox h2{margin-top:0}.setupbox p,.help{color:var(--muted);font-size:13px;line-height:1.55}.setupbox label{font-size:12px;color:var(--muted)}
-.hidden{display:none!important}.toast{position:fixed;left:50%;bottom:88px;transform:translateX(-50%);background:#2b2d33;border:1px solid var(--line);border-radius:12px;padding:11px 15px;font-size:13px;z-index:10;max-width:90%;text-align:center}
+:root{--bg:#101114;--panel:#1a1c21;--panel2:#22252b;--line:#30333b;--text:#f3f0e9;--muted:#9b9da6;--gold:#d0b078;--red:#e58b8b}*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,sans-serif;min-height:100vh}button,input,textarea{font:inherit}button{cursor:pointer}.app{max-width:850px;margin:auto;padding:24px 18px 110px}.top{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:26px}.brand{font-size:12px;letter-spacing:4px;color:var(--gold);font-weight:800}.cloud{font-size:11px;color:var(--muted);display:flex;align-items:center;gap:7px}.dot{width:7px;height:7px;border-radius:50%;background:#d5a85e}h1{font-size:clamp(28px,7vw,40px);line-height:1.1;margin:10px 0 18px;letter-spacing:-1.4px}.sub{color:var(--muted);font-size:14px;margin-bottom:20px}.search{width:100%;background:var(--panel);border:1px solid var(--line);border-radius:15px;padding:14px 16px;color:var(--text);outline:none}.search:focus,.field:focus{border-color:var(--gold)}.chips{display:flex;gap:8px;overflow:auto;padding:14px 0 18px;scrollbar-width:none}.chip{white-space:nowrap;border:1px solid var(--line);border-radius:999px;background:transparent;color:var(--muted);padding:9px 14px;font-size:12px}.chip.active{background:var(--gold);color:#171717;border-color:var(--gold);font-weight:700}.section{display:flex;align-items:center;justify-content:space-between;margin:8px 0 12px}.section span{font-size:11px;letter-spacing:2px;color:var(--muted);font-weight:700}.notes{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:11px}.note{background:var(--panel);border:1px solid var(--line);border-radius:17px;padding:16px;min-height:142px;display:flex;flex-direction:column;gap:9px;cursor:pointer}.note:active{transform:scale(.985)}.note h3{font-size:16px;margin:0;line-height:1.3;overflow-wrap:anywhere}.note p{font-size:13px;color:var(--muted);margin:0;line-height:1.45;white-space:pre-wrap;overflow:hidden;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical}.meta{display:flex;justify-content:space-between;align-items:center;margin-top:auto;gap:8px;color:var(--gold);font-size:10px}.tag{color:var(--gold);font-size:9px;letter-spacing:1.3px;text-transform:uppercase}.empty{grid-column:1/-1;text-align:center;padding:52px 12px;color:var(--muted)}.empty b{display:block;color:var(--text);font-size:17px;margin:10px}.fab{position:fixed;right:max(20px,calc((100vw - 850px)/2 + 18px));bottom:22px;background:var(--gold);color:#171717;border:0;border-radius:17px;padding:16px 20px;font-weight:800;box-shadow:0 10px 32px #0008}.modal{position:fixed;inset:0;background:#000a;display:none;align-items:flex-end;justify-content:center;padding:12px;z-index:5}.modal.show{display:flex}.sheet{background:var(--panel);border:1px solid var(--line);border-radius:22px 22px 16px 16px;width:min(100%,650px);padding:20px;max-height:94vh;overflow:auto}.sheethead{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px}.sheethead h2{margin:0;font-size:20px}.iconbtn{background:var(--panel2);border:1px solid var(--line);color:var(--text);border-radius:11px;padding:9px 12px}.field{display:block;width:100%;background:#121418;border:1px solid var(--line);border-radius:12px;color:var(--text);padding:13px;margin:9px 0;outline:none}.editor{min-height:230px;line-height:1.6;white-space:normal;overflow-wrap:anywhere}.editor:empty:before{content:attr(data-placeholder);color:#777b85}.editor h2,.editor h3{margin:12px 0 6px}.editor ul,.editor ol{padding-left:24px}.toolbar{display:flex;flex-wrap:wrap;gap:7px;margin:8px 0}.tool{min-width:40px;background:var(--panel2);border:1px solid var(--line);color:var(--text);border-radius:9px;padding:9px 11px}.tool:active,.tool:focus{border-color:var(--gold);color:var(--gold)}.actions{display:flex;gap:9px;align-items:center;margin-top:14px}.primary{background:var(--gold);color:#171717;border:0;border-radius:12px;padding:13px 17px;font-weight:800;flex:1}.danger{background:transparent;color:var(--red);border:1px solid #744747;border-radius:12px;padding:12px}.secondary{background:var(--panel2);color:var(--text);border:1px solid var(--line);border-radius:12px;padding:12px}.setup{max-width:560px;margin:10vh auto;padding:24px}.setupbox{background:var(--panel);border:1px solid var(--line);border-radius:20px;padding:22px}.setupbox h2{margin-top:0}.setupbox p,.help{color:var(--muted);font-size:13px;line-height:1.55}.setupbox label{font-size:12px;color:var(--muted)}.hidden{display:none!important}.toast{position:fixed;left:50%;bottom:88px;transform:translateX(-50%);background:#2b2d33;border:1px solid var(--line);border-radius:12px;padding:11px 15px;font-size:13px;z-index:10;max-width:90%;text-align:center}
 @media(max-width:520px){.notes{grid-template-columns:1fr}.note{min-height:122px}.app{padding-top:20px}.modal{padding:0}.sheet{border-radius:22px 22px 0 0;padding-bottom:calc(20px + env(safe-area-inset-bottom))}}
-</style>
-</head>
-<body>
-<div id="setup" class="setup hidden">
-  <div class="brand">DARK NOTES</div><h1>Подключим облако</h1>
-  <div class="setupbox">
-    <h2>Настройка Firebase</h2>
-    <p>В Firebase Console зарегистрируй Web-приложение (значок </>), затем скопируй объект <b>firebaseConfig</b> из раздела SDK setup. Вставь его сюда. Это одноразовая настройка.</p>
-    <label for="config">Объект firebaseConfig</label>
-    <textarea id="config" class="field bodyfield" placeholder='{\n  apiKey: "...",\n  authDomain: "...",\n  projectId: "dark-notes-939ce",\n  ...\n}'></textarea>
-    <button id="connect" class="primary">Подключить Firebase</button>
-    <p class="help">Не отправляй сюда пароли или закрытые ключи. Firebase web config содержит публичные идентификаторы приложения; безопасность обеспечивают Authentication и Firestore Rules.</p>
-  </div>
-</div>
-<div id="app" class="app hidden">
-  <div class="top"><div class="brand">DARK NOTES</div><div class="cloud"><i class="dot"></i><span id="status">Подключаем облако…</span></div></div>
-  <h1>Твои мысли.<br>Твоё пространство.</h1>
-  <div class="sub">Личный цифровой архив</div>
-  <input id="search" class="search" placeholder="⌕  Поиск заметок…" autocomplete="off">
-  <div id="chips" class="chips"></div>
-  <div class="section"><span id="listTitle">МОИ ЗАМЕТКИ</span><button class="iconbtn" id="favFilter">☆ Избранное</button></div>
-  <div id="notes" class="notes"></div>
-</div>
+</style></head><body>
+<div id="setup" class="setup hidden"><div class="brand">DARK NOTES</div><h1>Подключим облако</h1><div class="setupbox"><h2>Настройка Firebase</h2><p>Вставь объект firebaseConfig из настроек Web-приложения Firebase.</p><label for="config">Объект firebaseConfig</label><textarea id="config" class="field" style="min-height:180px" placeholder='{"apiKey":"...","authDomain":"...","projectId":"dark-notes-939ce","appId":"..."}'></textarea><button id="connect" class="primary">Подключить Firebase</button><p class="help">Не отправляй сюда пароли или закрытые ключи. Firebase web config содержит публичные идентификаторы приложения.</p></div></div>
+<div id="app" class="app hidden"><div class="top"><div class="brand">DARK NOTES</div><div class="cloud"><i class="dot"></i><span id="status">Подключаем облако…</span></div></div><h1>Твои мысли.<br>Твоё пространство.</h1><div class="sub">Личный цифровой архив</div><input id="search" class="search" placeholder="⌕  Поиск заметок…" autocomplete="off"><div id="chips" class="chips"></div><div class="section"><span id="listTitle">МОИ ЗАМЕТКИ</span><button class="iconbtn" id="favFilter">☆ Избранное</button></div><div id="notes" class="notes"></div></div>
 <button id="add" class="fab hidden">＋ Новая заметка</button>
-
-<div id="modal" class="modal">
- <div class="sheet">
-  <div class="sheethead"><h2 id="editorTitle">Новая заметка</h2><button class="iconbtn" id="close">✕</button></div>
-  <input id="title" class="field" placeholder="Заголовок">
-  <input id="folder" class="field" list="folderOptions" placeholder="Папка (например, Личное)">
-  <datalist id="folderOptions"><option>Личное</option><option>Работа</option><option>Учёба</option><option>Идеи</option><option>Промты</option></datalist>
-  <textarea id="body" class="field bodyfield" placeholder="Запиши свою мысль…"></textarea>
-  <div class="actions"><button id="favorite" class="secondary">☆ В избранное</button><button id="save" class="primary">Сохранить</button></div>
-  <div class="actions"><button id="delete" class="danger hidden">Удалить заметку</button></div>
- </div>
-</div>
-<div id="toast" class="toast hidden"></div>
-
+<div id="modal" class="modal"><div class="sheet"><div class="sheethead"><h2 id="editorTitle">Новая заметка</h2><button class="iconbtn" id="close">✕</button></div><input id="title" class="field" placeholder="Заголовок"><input id="folder" class="field" list="folderOptions" placeholder="Папка (например, Личное)"><datalist id="folderOptions"><option>Личное</option><option>Работа</option><option>Учёба</option><option>Идеи</option><option>Промты</option></datalist><div class="toolbar" aria-label="Форматирование"><button class="tool" data-cmd="bold"><b>B</b></button><button class="tool" data-cmd="italic"><i>I</i></button><button class="tool" data-cmd="underline"><u>U</u></button><button class="tool" data-cmd="insertUnorderedList">• Список</button><button class="tool" data-cmd="insertOrderedList">1. Список</button><button class="tool" data-block="h2">Заголовок</button><button class="tool" data-block="blockquote">Цитата</button><button class="tool" data-cmd="removeFormat">Очистить</button></div><div id="body" class="field editor" contenteditable="true" data-placeholder="Запиши свою мысль…"></div><div class="actions"><button id="favorite" class="secondary">☆ В избранное</button><button id="save" class="primary">Сохранить</button></div><div class="actions"><button id="delete" class="danger hidden">Удалить заметку</button></div></div></div><div id="toast" class="toast hidden"></div>
 <script type="module">
-import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-app.js";
-import { getAuth, signInAnonymously, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-auth.js";
-import { getFirestore, collection, addDoc, doc, updateDoc, deleteDoc, onSnapshot, query, orderBy, serverTimestamp, enableIndexedDbPersistence } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-firestore.js";
-
-const $ = id => document.getElementById(id);
-let app, auth, db, uid, stopListening, notes=[], editing=null, selectedFolder="Все", onlyFav=false, isFav=false;
-const defaultConfig = {
-  apiKey: "AIzaSyBsmH4aGjktykJWmB2OH4UjesOub1KdUs0",
-  authDomain: "dark-notes-939ce.firebaseapp.com",
-  projectId: "dark-notes-939ce",
-  storageBucket: "dark-notes-939ce.firebasestorage.app",
-  messagingSenderId: "122903935346",
-  appId: "1:122903935346:web:272821e11adea3d601c5eb",
-  measurementId: "G-HRL4JVXR77"
-};
-function showToast(msg){$("toast").textContent=msg;$("toast").classList.remove("hidden");setTimeout(()=>$("toast").classList.add("hidden"),2800)}
-function showSetup(){ $("setup").classList.remove("hidden"); $("app").classList.add("hidden"); $("add").classList.add("hidden"); }
-function showApp(){ $("setup").classList.add("hidden"); $("app").classList.remove("hidden"); $("add").classList.remove("hidden"); }
-function readConfig(raw){
-  // Accepts a plain JSON object, or the JS object literal copied from Firebase docs.
-  let clean=raw.trim().replace(/^const\s+\w+\s*=\s*/, "").replace(/;\s*$/, "");
-  try{return JSON.parse(clean)}catch{}
-  clean=clean.replace(/([{,]\s*)([A-Za-z_$][\w$]*)\s*:/g,'$1"$2":').replace(/,\s*}/g,'}');
-  return JSON.parse(clean);
-}
-async function connect(config){
-  if(!config.apiKey || !config.projectId || !config.appId) throw new Error("В конфигурации не хватает apiKey, projectId или appId.");
-  app=initializeApp(config); auth=getAuth(app); db=getFirestore(app);
-  try{await enableIndexedDbPersistence(db)}catch(e){console.info("Offline cache:",e.code)}
-  await signInAnonymously(auth);
-  onAuthStateChanged(auth,user=>{
-    if(!user)return; uid=user.uid; $("status").textContent="Облако подключено";
-    if(stopListening)stopListening();
-    const q=query(collection(db,"users",uid,"notes"),orderBy("updatedAt","desc"));
-    stopListening=onSnapshot(q,snap=>{
-      notes=snap.docs.map(d=>({id:d.id,...d.data(),updatedAt:d.data().updatedAt?.toDate?.()||new Date()}));
-      render();
-    },err=>{console.error(err);$("status").textContent="Ошибка синхронизации";showToast("Не удалось загрузить заметки: "+err.message)});
-    showApp();
-  });
-}
-$("connect").addEventListener("click",async()=>{
-  try{const cfg=readConfig($("config").value);localStorage.setItem("darkNotesFirebaseConfig",JSON.stringify(cfg));await connect(cfg)}
+import {initializeApp} from 'https://www.gstatic.com/firebasejs/11.0.2/firebase-app.js';
+import {getAuth,signInAnonymously,onAuthStateChanged} from 'https://www.gstatic.com/firebasejs/11.0.2/firebase-auth.js';
+import {getFirestore,collection,addDoc,doc,updateDoc,deleteDoc,onSnapshot,query,orderBy,serverTimestamp,enableIndexedDbPersistence} from 'https://www.gstatic.com/firebasejs/11.0.2/firebase-firestore.js';
+const $=id=>document.getElementById(id);let app,auth,db,uid,stopListening,notes=[],editing=null,selectedFolder='Все',onlyFav=false,isFav=false;
+const defaultConfig={apiKey:'AIzaSyBsmH4aGjktykJWmB2OH4UjesOub1KdUs0',authDomain:'dark-notes-939ce.firebaseapp.com',projectId:'dark-notes-939ce',storageBucket:'dark-notes-939ce.firebasestorage.app',messagingSenderId:'122903935346',appId:'1:122903935346:web:272821e11adea3d601c5eb',measurementId:'G-HRL4JVXR77'};
+function showToast(m){$('toast').textContent=m;$('toast').classList.remove('hidden');setTimeout(()=>$('toast').classList.add('hidden'),2800)}function showSetup(){$('setup').classList.remove('hidden');$('app').classList.add('hidden');$('add').classList.add('hidden')}function showApp(){$('setup').classList.add('hidden');$('app').classList.remove('hidden');$('add').classList.remove('hidden')}
+function readConfig(raw){let c=raw.trim().replace(/^const\s+\w+\s*=\s*/,'').replace(/;\s*$/,'');try{return JSON.parse(c)}catch{}c=c.replace(/([{,]\s*)([A-Za-z_$][\w$]*)\s*:/g,'$1"$2":').replace(/,\s*}/g,'}');return JSON.parse(c)}
+async function connect(cfg){if(!cfg.apiKey||!cfg.projectId||!cfg.appId)throw Error('В конфигурации не хватает обязательных полей');app=initializeApp(cfg);auth=getAuth(app);db=getFirestore(app);try{await enableIndexedDbPersistence(db)}catch(e){console.info('Offline cache',e.code)}await signInAnonymously(auth);onAuthStateChanged(auth,user=>{if(!user)return;uid=user.uid;$('status').textContent='Облако подключено';if(stopListening)stopListening();const q=query(collection(db,'users',uid,'notes'),orderBy('updatedAt','desc'));stopListening=onSnapshot(q,s=>{notes=s.docs.map(d=>({id:d.id,...d.data(),updatedAt:d.data().updatedAt?.toDate?.()||new Date()}));render()},e=>{console.error(e);$('status').textContent='Ошибка синхронизации';showToast('Ошибка загрузки: '+e.message)});showApp()})}
+$('connect').onclick=async()=>{try{const c=readConfig($('config').value);localStorage.setItem('darkNotesFirebaseConfig',JSON.stringify(c));await connect(c)}catch(e){showToast('Ошибка: '+e.message)}};
+function cleanHtml(html){const docm=new DOMParser().parseFromString(html,'text/html');const allowed=new Set(['B','STRONG','I','EM','U','UL','OL','LI','BR','P','DIV','H2','H3','BLOCKQUOTE']);function walk(root){[...root.childNodes].forEach(n=>{if(n.nodeType===1){if(!allowed.has(n.tagName)){n.replaceWith(...n.childNodes);return} [...n.attributes].forEach(a=>n.removeAttribute(a.name));walk(n)}else if(n.nodeType!==3)n.remove()})}walk(docm.body);return docm.body.innerHTML}
+function plainText(html){const d=new DOMParser().parseFromString(html,'text/html');return d.body.textContent||''}
+function openEditor(n=null){editing=n;isFav=!!n?.favorite;$('editorTitle').textContent=n?'Редактировать заметку':'Новая заметка';$('title').value=n?.title||'';$('folder').value=n?.folder||'Личное';$('body').innerHTML=cleanHtml(n?.body||'');$('favorite').textContent=isFav?'★ В избранном':'☆ В избранное';$('delete').classList.toggle('hidden',!n);$('modal').classList.add('show')}
+function closeEditor(){$('modal').classList.remove('show');editing=null}
+async function saveNote(){const title=$('title').value.trim(),body=cleanHtml($('body').innerHTML),folder=$('folder').value.trim()||'Личное';if(!title&&!plainText(body).trim()){showToast('Добавь заголовок или текст заметки');return}if(!uid){showToast('Подключаем аккаунт…');return}const data={title:title||'Без названия',body,folder,favorite:isFav,updatedAt:serverTimestamp()};try{if(editing)await updateDoc(doc(db,'users',uid,'notes',editing.id),data);else await addDoc(collection(db,'users',uid,'notes'),{...data,createdAt:serverTimestamp()});closeEditor();showToast('Заметка сохранена в облаке')}catch(e){showToast('Не удалось сохранить: '+e.message)}}
+async function deleteNote(){if(!editing||!confirm('Удалить эту заметку?'))return;try{await deleteDoc(doc(db,'users',uid,'notes',editing.id));closeEditor();showToast('Заметка удалена')}catch(e){showToast('Ошибка удаления: '+e.message)}}
+function render(){const folders=['Все',...new Set(notes.map(n=>n.folder||'Личное'))];if(!folders.includes(selectedFolder))selectedFolder='Все';$('chips').innerHTML=folders.map(f=>`<button class="chip ${f===selectedFolder?'active':''}" data-folder="${escapeHtml(f)}">${escapeHtml(f)}</button>`).join('');$('chips').querySelectorAll('button').forEach(b=>b.onclick=()=>{selectedFolder=b.dataset.folder;render()});const term=$('search').value.toLowerCase();const filtered=notes.filter(n=>(selectedFolder==='Все'||n.folder===selectedFolder)&&(!onlyFav||n.favorite)&&(`${n.title} ${plainText(n.body||'')} ${n.folder}`.toLowerCase().includes(term)));$('listTitle').textContent=onlyFav?'ИЗБРАННОЕ':'МОИ ЗАМЕТКИ';$('favFilter').textContent=onlyFav?'★ Избранное':'☆ Избранное';$('notes').innerHTML=filtered.length?filtered.map(n=>`<article class="note" data-id="${n.id}"><div class="tag">${escapeHtml(n.folder||'Личное')}${n.favorite?' · ★':''}</div><h3>${escapeHtml(n.title||'Без названия')}</h3><p>${escapeHtml(plainText(n.body||'')||'Пустая заметка')}</p><div class="meta"><span>${formatDate(n.updatedAt)}</span><span>ОТКРЫТЬ ↗</span></div></article>`).join(''):`<div class="empty"><div style="font-size:30px;color:var(--gold)">✦</div><b>${term?'Ничего не найдено':'Пока здесь пусто'}</b>Создай первую заметку</div>`;$('notes').querySelectorAll('.note').forEach(el=>el.onclick=()=>openEditor(notes.find(n=>n.id===el.dataset.id)))}
+function formatDate(d){try{return new Intl.DateTimeFormat('ru-RU',{day:'2-digit',month:'2-digit',hour:'2-digit',minute:'2-digit'}).format(d)}catch{return ''}}function escapeHtml(s){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
+$('add').onclick=()=>openEditor();$('close').onclick=closeEditor;$('save').onclick=saveNote;$('delete').onclick=deleteNote;$('favorite').onclick=()=>{isFav=!isFav;$('favorite').textContent=isFav?'★ В избранном':'☆ В избранное'};$('search').oninput=render;$('favFilter').onclick=()=>{onlyFav=!onlyFav;render()};$('modal').onclick=e=>{if(e.target===$('modal'))closeEditor()};document.querySelectorAll('[data-cmd]').forEach(b=>b.onclick=()=>{ $('body').focus();document.execCommand(b.dataset.cmd,false,null)});document.querySelectorAll('[data-block]').forEach(b=>b.onclick=()=>{$('body').focus();document.execCommand('formatBlock',false,b.dataset.block)});
+try{const saved=localStorage.getItem('darkNotesFirebaseConfig');connect(saved?JSON.parse(saved):defaultConfig).catch(e=>{console.error(e);showSetup();showToast('Не удалось подключить Firebase: '+e.message)})}catch(e){showSetup()}
+</script></body></html>
+it connect(cfg)}
   catch(e){showToast("Ошибка подключения: "+e.message)}
 });
 function openEditor(note=null){
