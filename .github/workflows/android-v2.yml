@@ -12,11 +12,24 @@ on:
       - 'scripts/**'
       - '.github/workflows/android-v2.yml'
 
+permissions:
+  contents: write
+
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      - name: Download and commit mystical note backgrounds
+        run: |
+          node scripts/download-note-backgrounds.mjs
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add assets/note-backgrounds
+          if ! git diff --cached --quiet; then
+            git commit -m "Add mystical note background artwork [skip ci]"
+            git push
+          fi
       - uses: actions/setup-node@v4
         with:
           node-version: 20
