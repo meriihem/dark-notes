@@ -1,7 +1,7 @@
 import { mkdir, copyFile } from 'node:fs/promises';
 
 await mkdir('www', { recursive: true });
-await (await import('node:child_process')).execSync('node scripts/generate-icons.mjs');
+await (await import('node:child_process')).execSync('node scripts/generate-icons.mjs --web');
 await copyFile('index.html', 'www/index.html');
 for (const file of ['manifest.webmanifest', 'service-worker.js']) {
   try {
