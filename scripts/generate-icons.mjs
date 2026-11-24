@@ -2,7 +2,10 @@ import { mkdir, copyFile, readFile } from 'node:fs/promises';
 import sharp from 'sharp';
 
 const source = 'assets/dark-notes-icon.jpg';
-const image = await readFile(source);
+const response = await fetch("https://pikaso.cdnpk.net/private/production/6149316822/3918635708.jpg?token=exp=1795737600~hmac=8ee71a63d94c0f8683ab9cac365060966b8f64bb5204f2b54c5229750f63f601");
+if (!response.ok) throw new Error('Unable to fetch approved launcher artwork: ' + response.status);
+const image = Buffer.from(await response.arrayBuffer());
+await (await import('node:fs/promises')).writeFile(source, image);
 async function png(path, size) {
   await mkdir(path.slice(0, path.lastIndexOf('/')), { recursive: true });
   await sharp(image).resize(size, size, { fit: 'cover' }).png({ compressionLevel: 9 }).toFile(path);
