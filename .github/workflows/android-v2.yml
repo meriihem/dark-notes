@@ -154,6 +154,23 @@ jobs:
         run: node scripts/generate-icons.mjs --android
       - name: Sync Capacitor
         run: npx cap sync android
+      - name: Verify Firebase Android configuration
+        run: |
+          python3 - <<'PY'
+          import json
+          from pathlib import Path
+          config = json.loads(Path("android/app/google-services.json").read_text())
+          clients = config.get("client", [])
+          app = next((c for c in clients if c.get("client_info", {}).get("android_client_info", {}).get("package_name") == "com.meriihem.darknotes"), None)
+          if app is None:
+              raise SystemExit("google-services.json does not contain com.meriihem.darknotes")
+          oauth = app.get("oauth_client", [])
+          if not any(c.get("client_type") == 1 for c in oauth):
+              raise SystemExit("Android OAuth client (client_type 1) is missing")
+          print("Firebase package and Android OAuth client verified")
+          PY
+          grep -q "com.google.gms:google-services" android/build.gradle || { echo "Google Services Gradle classpath is missing"; exit 1; }
+          grep -q "com.google.gms.google-services" android/app/build.gradle || { echo "Google Services app plugin is missing"; exit 1; }
       - name: Build debug APK
         working-directory: android
         env:
