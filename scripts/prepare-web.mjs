@@ -1,3 +1,4 @@
+import { build } from 'esbuild';
 import { mkdir, copyFile, cp } from 'node:fs/promises';
 
 await mkdir('www', { recursive: true });
@@ -16,3 +17,5 @@ for (const file of ['icon-192.png','icon-512.png','icon-512-maskable.png']) awai
 console.log('Prepared Dark Notes web assets and icons in ./www');
 
 // Rebuild after polishing the per-note mystical background picker.
+
+await build({ entryPoints: ['scripts/native-auth.js'], bundle: true, platform: 'browser', format: 'iife', target: ['es2020'], outfile: 'www/native-auth.js' });
