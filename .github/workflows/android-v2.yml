@@ -93,11 +93,26 @@ jobs:
                   }
               }
           """
-          s = re.sub(r"android\s*\{", lambda m: m.group(0) + signing, s, count=1)
-          s = re.sub(r"(buildTypes\s*\{)", r"\1\n        debug { signingConfig signingConfigs.darkNotes }", s, count=1)
-          s, count = re.subn(r"(buildTypes\s*\{\s*release\s*\{)", r"\1\n            signingConfig signingConfigs.darkNotes", s, count=1)
-          if count == 0:
-              raise SystemExit("Could not find release build type in generated Gradle file")
+          s = re.sub(r"android\\s*\\{", lambda m: m.group(0) + signing, s, count=1)
+          s, debug_count = re.subn(
+              r"(buildTypes\\s*\\{\\s*debug\\s*\\{)",
+              r"\\1\\n            signingConfig signingConfigs.darkNotes",
+              s,
+              count=1
+          )
+          if debug_count == 0:
+              s = re.sub(
+                  r"(buildTypes\\s*\\{)",
+                  r"\\1\\n        debug { signingConfig signingConfigs.darkNotes }",
+                  s,
+                  count=1
+              )
+          s = re.sub(
+              r"(buildTypes\\s*\\{\\s*release\\s*\\{)",
+              r"\\1\\n            signingConfig signingConfigs.darkNotes",
+              s,
+              count=1
+          )
           p.write_text(s)
           PY
       - name: Configure immersive Android activity
