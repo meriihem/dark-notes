@@ -1,8 +1,8 @@
 import { mkdir, copyFile, readFile } from 'node:fs/promises';
 import sharp from 'sharp';
 
-const source = 'assets/dark-notes-icon.jpg';
-// Use the artwork committed in the repository; remote temporary URLs may expire.
+const source = 'assets/dark-notes-icon.svg';
+// Render the committed vector artwork; remote temporary URLs may expire.
 const image = await readFile(source);
 async function png(path, size) {
   await mkdir(path.slice(0, path.lastIndexOf('/')), { recursive: true });
